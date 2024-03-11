@@ -6,20 +6,29 @@
     <title>My Weather App</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        .date-time {
+            font-family: 'Arial', sans-serif; /* Change the font */
+            margin-top: 10px; /* Add margin to create a gap */
+        }
+    </style>
 </head>
 <body>
     
     <div class="card">
-        <h1 style="text-align: justify; margin-bottom: 10px; color: transparent; background-image: url('https://i.pinimg.com/originals/be/3b/9f/be3b9f4df4079b8d1c83e492dd055409.gif'); background-size: cover; background-position: center; -webkit-background-clip: text; font-size: 30px; font-family: 'Lucida Calligraphy';">AtmosAlly</h1>
+        <h1 style="text-align: justify; margin-bottom: 20px; color: transparent; background-image: url('https://i.pinimg.com/originals/11/0f/2b/110f2bbc1027482ffe89b353d49b958e.gif'); background-size: cover; background-position: center; -webkit-background-clip: text; font-size: 30px; font-family: 'Lucida Calligraphy';">AtmosAlly</h1>
         <div class="search">
-            <input type="text" placeholder="Enter City Name..." spellcheck="false">
+            <input type="text" placeholder="Enter Country/City Name..." spellcheck="false">
             <button><i class="fas fa-search"></i></button>
         </div>
         <div class="error-container">
             <p class="error-message" style="display: none; color: red;">Invalid city name entered. Please try again.</p>
         </div>
+
+        <div class="date-time" id="date-time"></div>
+
         <div class="weather" style="display: none;">
-            <img src="images/rain.png" class="weather-icon">
+            <img src="images/rain.png" class="weather-icon" style="margin-top: 5px;">
             <h1 class="temp">26°c</h1>
             <h2 class="city">Kolkata</h2>
             <div class="details">

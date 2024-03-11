@@ -1,4 +1,32 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // Function to get the greeting message based on time of day
+    function getGreeting() {
+        const hour = new Date().getHours();
+        let greeting;
+        if (hour >= 5 && hour < 12) {
+            greeting = "Good morning ! Welcome to AtmosAlly";
+        } else if (hour >= 12 && hour < 18) {
+            greeting = "Good afternoon ! Enjoy the weather with AtmosAlly";
+        } else if (hour >= 18 && hour < 22) {
+            greeting = "Good evening ! Stay informed with AtmosAlly";
+        } else {
+            greeting = "Good night ! Rest well and plan your day with AtmosAlly";
+        }
+        return greeting;
+    }
+    // Function to display date, time, and greeting
+    function displayDateTime() {
+        const dateElem = document.getElementById("date-time");
+        const currentDate = new Date();
+        const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true };
+        const dateTimeString = currentDate.toLocaleString('en-US', options);
+        const greeting = getGreeting();
+        dateElem.textContent = `${greeting} It's ${dateTimeString}`;
+    }
+
+    // Call the function to display date, time, and greeting
+    displayDateTime();
+
     const apiKey = "d2585fdd007251469ff2d3b8fc95280f";
     const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
 
