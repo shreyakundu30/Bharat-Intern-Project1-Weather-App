@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: url('https://images.pexels.com/photos/39811/pexels-photo-39811.jpeg?cs=srgb&dl=pexels-veeterzy-39811.jpg&fm=jpg');
+    background-size: cover;
+}
+
+.card {
+    width: 90%;
+    max-width: 470px;
+    background: rgba(234, 210, 201, 0.73); /* Change the background color to rgba with an alpha value */
+    color: black;
+    margin: 50px auto 0;
+    border-radius: 50px 5px;
+    padding: 25px 30px;
+    margin-right: 480px;
+    text-align: center;
+    backdrop-filter: blur(10px); /* Apply a blur effect to the background */
+    opacity: 0.9; /* Adjust the opacity for transparency */
+
+    &::before {
+        content: "";
+        position: absolute;
+        border-radius: 50px 5px;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 5px solid rgb(133, 133, 133);
+        transition: all .5s;
+        animation: clippath 3s infinite linear;
+      }
+}
+
+@keyframes clippath {
+
+    0%,
+    100% {
+      clip-path: inset(0 0 95% 0);
+    }
+
+    25% {
+      clip-path: inset(0 95% 0 0);
+    }
+
+    50% {
+      clip-path: inset(95% 0 0 0);
+    }
+
+    75% {
+      clip-path: inset(0 0 0 95%);
+    }
+  }
+
+
+.search {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px; /* Added margin for spacing */
+}
+
+.search input {
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    color: #555;
+    padding: 10px 25px;
+    height: 60px;
+    border-radius: 30px;
+    flex: 1;
+    margin-right: 16px;
+    font-size: 18px;
+}
+
+.search button {
+    border: 0;
+    outline: 0;
+    background: #ebfffc;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+}
+
+.search i {
+    font-size: 30px;
+}
+
+.weather-icon {
+    width: 170px;
+    margin-top: 30px;
+}
+
+.weather h1 {
+    font-size: 60px;
+    font-weight: 500;
+    margin-bottom: 5px; /* Adjusted margin for spacing */
+}
+
+.weather h2 {
+    font-size: 40px;
+    font-weight: 350;
+    margin-top: 0; /* Removed negative margin */
+}
+
+.details,
+.details2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-around; /* Changed from space-between for better alignment */
+    padding: 0 20px;
+    margin-top: 30px; /* Adjusted margin for spacing */
+}
+
+.col,
+.col2 {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.col img,
+.col2 img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+.humidity,
+.wind,
+.feelslike,
+.pressure {
+    font-size: 20px; /* Adjusted font size for better readability */
+    margin-top: 0; /* Removed negative margin */
+}
+
+.error-message {
+    margin-top: 10px; /* Added margin for spacing */
+    font-size: 16px; /* Adjusted font size for better readability */
+    display: none; /* Initially hidden */
+}
+
+/* Add this CSS code at the end of your existing CSS */
+
+@media screen and (max-width: 600px) {
+    .card {
+      width: 90%;
+      padding: 25px 15px; /* Adjusted padding for smaller screens */
+    }
+    
+    .weather h1 {
+      font-size: 40px; /* Adjusted font size for smaller screens */
+    }
+    
+    .weather h2 {
+      font-size: 30px; /* Adjusted font size for smaller screens */
+    }
+    
+    .details,
+    .details2 {
+      flex-direction: column; /* Changed flex-direction to stack elements vertically */
+      align-items: center;
+    }
+    
+    .col,
+    .col2 {
+      margin-bottom: 15px; /* Added margin between columns for smaller screens */
+    }
+  }
+  

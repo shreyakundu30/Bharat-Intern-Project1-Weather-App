@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Weather App</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    
+    <div class="card">
+        <h1 style="text-align: justify; margin-bottom: 10px; color: transparent; background-image: url('https://i.pinimg.com/originals/be/3b/9f/be3b9f4df4079b8d1c83e492dd055409.gif'); background-size: cover; background-position: center; -webkit-background-clip: text; font-size: 30px; font-family: 'Lucida Calligraphy';">AtmosAlly</h1>
+        <div class="search">
+            <input type="text" placeholder="Enter City Name..." spellcheck="false">
+            <button><i class="fas fa-search"></i></button>
+        </div>
+        <div class="error-container">
+            <p class="error-message" style="display: none; color: red;">Invalid city name entered. Please try again.</p>
+        </div>
+        <div class="weather" style="display: none;">
+            <img src="images/rain.png" class="weather-icon">
+            <h1 class="temp">26°c</h1>
+            <h2 class="city">Kolkata</h2>
+            <div class="details">
+                <div class="col">
+                    <img src="https://cdn.iconscout.com/icon/premium/png-256-thumb/humidity-2092241-1763417.png">
+                    <div>
+                        <p class="humidity">31%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="https://static-00.iconduck.com/assets.00/wind-icon-2048x1570-qr102xee.png">
+                    <div>
+                        <p class="wind">8 Km/h</p>
+                        <p>Wind Speed</p>
+                    </div>
+                </div>
+            </div>
+            <div class="details2">
+                <div class="col2">
+                    <img src="https://static-00.iconduck.com/assets.00/thermometer-celcius-icon-221x256-828riviz.png">
+                    <div>
+                        <p class="feelslike">27°</p>
+                        <p>Real Feel</p>
+                    </div>
+                </div>
+                <div class="col2">
+                    <img src="https://cdn-icons-png.freepik.com/512/7614/7614285.png">
+                    <div>
+                        <p class="pressure">↓ 1013 mb</p>
+                        <p>Pressure</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const apiKey = "d2585fdd007251469ff2d3b8fc95280f";
+            const apiUrl = "https://api.openweathermap.org/data/2.5/weather?units=metric&q=";
+
+            const searchBox = document.querySelector(".search input");
+            const searchBtn = document.querySelector(".search button");
+            const weatherContainer = document.querySelector(".weather");
+            const weatherIcon = document.querySelector(".weather-icon");
+            const errorContainer = document.querySelector(".error-container");
+
+            let debounceTimer;
+
+            async function checkWeather(city) {
+                clearTimeout(debounceTimer);
+                debounceTimer = setTimeout(async () => {
+                    const response = await fetch(apiUrl + city + `&appid=${apiKey}`);
+                    const data = await response.json();
+
+                    const errorMessage = document.querySelector(".error-message");
+
+                    if (data.cod === "404") {
+                        errorMessage.textContent = "Invalid city name entered. Please try again.";
+                        errorMessage.style.display = "block";
+                        weatherContainer.style.display = "none";
+                    } else {
+                        errorMessage.style.display = "none";
+                        weatherContainer.style.display = "block";
+
+                        document.querySelector(".city").textContent = data.name;
+                        document.querySelector(".temp").textContent = Math.round(data.main.temp) + "°c";
+                        document.querySelector(".humidity").textContent = data.main.humidity + "%";
+                        document.querySelector(".wind").textContent = data.wind.speed + " Km/h";
+                        document.querySelector(".feelslike").textContent = data.main.feels_like + "°";
+                        document.querySelector(".pressure").textContent = "↓ " + data.main.pressure + " mb";
+
+                        if (data.weather[0].main == "Clouds") {
+                            weatherIcon.src = "images/clouds.png";
+                        } else if (data.weather[0].main == "Clear") {
+                            weatherIcon.src = "images/clear.png";
+                        } else if (data.weather[0].main == "Rain") {
+                            weatherIcon.src = "images/rain.png";
+                        } else if (data.weather[0].main == "Drizzle") {
+                            weatherIcon.src = "images/drizzle.png";
+                        } else if (data.weather[0].main == "Mist") {
+                            weatherIcon.src = "images/mist.png";
+                        }
+                    }
+                }, 300); // Wait for 300 milliseconds before making the API call
+            }
+
+            searchBtn.addEventListener("click", () => {
+                checkWeather(searchBox.value);
+            });
+
+        });
+    </script>
+</body>
+</html>
